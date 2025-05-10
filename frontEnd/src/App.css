@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    font-family: 'Lemonada', sans-serif;
+}
+
+main {
+    min-height: 98vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
