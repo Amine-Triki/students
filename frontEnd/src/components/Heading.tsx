@@ -1,7 +1,13 @@
 import {Box , Typography} from "@mui/material";
 import { LineWobble } from 'ldrs/react'
 import 'ldrs/react/LineWobble.css'
-const heading = ({title , subTitle}) => {
+// Define the props interface
+interface HeadingProps {
+  title: string;
+  subTitle: string;
+}
+
+const heading = ({ title, subTitle }: HeadingProps) => {
   return (
     <Box textAlign="center" my={8}>
       <Typography variant="h4" fontWeight={700} gutterBottom>
