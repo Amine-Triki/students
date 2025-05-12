@@ -3,8 +3,9 @@ import { FaUserLarge } from "react-icons/fa6";
 import { RiMailLine, RiMapPinLine } from "react-icons/ri";
 
 import Heading from "../../components/Heading";
+
 const Contact = () => {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
   };
 
@@ -58,20 +59,22 @@ const Contact = () => {
             {/* Contact Form */}
             <Box component="form" onSubmit={handleSubmit} flex={1} textAlign="start">
               <Grid container spacing={2} mb={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    fullWidth
-                    label="First Name"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    fullWidth
-                    label="Last Name"
-                    variant="outlined"
-                  />
-                </Grid>
+
+                <Box mb={2}>
+                <TextField
+                  fullWidth
+                  label="First Name"
+                  variant="outlined"
+                />
+              </Box>
+              <Box mb={2}>
+                <TextField
+                  fullWidth
+                  label="Last Name"
+                  variant="outlined"
+                />
+              </Box>
+
               </Grid>
 
               <Box mb={2}>
