@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Container,
@@ -15,12 +15,25 @@ import {
 import projects from "./AllProjects";
 import Heading from "../../components/Heading";
 
-const categories = ["all", "JavaScript", "Wordpress", "React"];
+interface Project {
+  title: string;
+  description: string;
+  category: string;
+  imageSrc: string;
+  github?: string;
+  link?: string;
+}
 
-const Projects = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
+const categories = ["all", "JavaScript", "Wordpress", "React"] as const;
+type Category = typeof categories[number];
 
-  const handleCategoryChange = (event, newValue) => {
+const Projects: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState<Category>("all");
+
+  const handleCategoryChange = (
+    _event: React.SyntheticEvent,
+    newValue: Category
+  ) => {
     setActiveCategory(newValue);
   };
 
@@ -56,7 +69,7 @@ const Projects = () => {
           </Box>
 
           <Grid container spacing={4} justifyContent="center">
-            {projects
+            {(projects as Project[])
               .filter(
                 (project) =>
                   activeCategory === "all" ||
@@ -67,7 +80,7 @@ const Projects = () => {
                   <Card sx={{ height: "100%" }}>
                     <CardMedia
                       component="img"
-                      height="150   "
+                      height="150"
                       image={project.imageSrc}
                       alt={project.title}
                     />
@@ -75,12 +88,12 @@ const Projects = () => {
                       <Typography variant="h6" color="primary" gutterBottom>
                         {project.title}
                       </Typography>
-                      <Typography variant="body2" color="textSecondary">
+                      <Typography variant="body2" color="text.secondary">
                         {project.description}
                       </Typography>
                     </CardContent>
                     <CardActions sx={{ justifyContent: "space-around" }}>
-                      {project.category !== "Wordpress" && (
+                      {project.category !== "Wordpress" && project.github && (
                         <Button
                           variant="contained"
                           href={project.github}
@@ -91,17 +104,18 @@ const Projects = () => {
                           Github
                         </Button>
                       )}
-                      {project.link !== "" && (
-                      <Button
-                        variant="contained"
-                        href={project.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        sx={{ backgroundColor: "#BFECFF", color: "black" }}
-                      >
-                        Preview
-                      </Button>
-                      )}</CardActions>
+                      {project.link && (
+                        <Button
+                          variant="contained"
+                          href={project.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          sx={{ backgroundColor: "#BFECFF", color: "black" }}
+                        >
+                          Preview
+                        </Button>
+                      )}
+                    </CardActions>
                   </Card>
                 </Grid>
               ))}
