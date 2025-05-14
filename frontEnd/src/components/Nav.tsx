@@ -28,7 +28,7 @@ function Nav(): JSX.Element {
         <AppBar
             position="static"
             sx={{
-                background: "linear-gradient(to right, #2c0c92, #ffffff)",
+                background: "linear-gradient(to right,#b61535, #ffffff)",
             }}
         >
             <Container maxWidth="xl">
