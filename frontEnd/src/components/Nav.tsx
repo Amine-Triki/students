@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
 import AmineLogo from "../assets/4-157-71-68080953ce2d3.webp";
 
-const pages: string[] = ["Home", "Projects", "Skills", "Contact"];
+const pages: string[] = ["Home", "Projects", "Students" ,"Skills", "Contact"];
 
 function Nav(): JSX.Element {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
