@@ -1,4 +1,4 @@
-import React from "react";
+import  { useState, type JSX, type MouseEvent } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,26 +8,29 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AmineLogo from "../assets/4-157-71-68080953ce2d3.webp";
 
-const pages = ["Home", "Projects", "Skills", "Contact"];
+const pages: string[] = ["Home", "Projects", "Skills", "Contact"];
 
-function Nav() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
+function Nav(): JSX.Element {
+    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
-    const handleOpenNavMenu = (event) => {
+    const handleOpenNavMenu = (event: MouseEvent<HTMLElement>): void => {
         setAnchorElNav(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (): void => {
         setAnchorElNav(null);
     };
 
     return (
-        <AppBar position="static"   sx={{
-            background: "linear-gradient(to right, #2c0c92, #ffffff)", 
-          }}>
+        <AppBar
+            position="static"
+            sx={{
+                background: "linear-gradient(to right, #2c0c92, #ffffff)",
+            }}
+        >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
@@ -37,7 +40,7 @@ function Nav() {
                         href="/"
                         sx={{
                             mr: 2,
-                            display: {xs: "none", md: "flex"},
+                            display: { xs: "none", md: "flex" },
                             fontWeight: 700,
                             letterSpacing: ".2rem",
                             color: "inherit",
@@ -47,7 +50,7 @@ function Nav() {
                         Amine Triki
                     </Typography>
 
-                    <Box sx={{flexGrow: 1, display: {xs: "flex", md: "none"}}}>
+                    <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -56,7 +59,7 @@ function Nav() {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon/>
+                            <MenuIcon />
                         </IconButton>
                         <Menu
                             id="menu-appbar"
@@ -72,13 +75,17 @@ function Nav() {
                             }}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
-                            sx={{display: {xs: "block", md: "none"}}}
+                            sx={{ display: { xs: "block", md: "none" } }}
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <NavLink
-                                        to={page.toLowerCase() === 'home' ? '/' : `/${page.toLowerCase()}`}
-                                        style={({isActive}) => ({
+                                        to={
+                                            page.toLowerCase() === "home"
+                                                ? "/"
+                                                : `/${page.toLowerCase()}`
+                                        }
+                                        style={({ isActive }: { isActive: boolean }) => ({
                                             textDecoration: "none",
                                             color: isActive ? "yellow" : "black",
                                             width: "100%",
@@ -92,7 +99,6 @@ function Nav() {
                                 </MenuItem>
                             ))}
                         </Menu>
-
                     </Box>
 
                     <Typography
@@ -102,7 +108,7 @@ function Nav() {
                         href="#app-bar-with-responsive-menu"
                         sx={{
                             mr: 2,
-                            display: {xs: "flex", md: "none"},
+                            display: { xs: "flex", md: "none" },
                             flexGrow: 1,
                             fontWeight: 700,
                             letterSpacing: ".2rem",
@@ -115,15 +121,19 @@ function Nav() {
                     <Box
                         sx={{
                             flexGrow: 1,
-                            display: {xs: "none", md: "flex"},
+                            display: { xs: "none", md: "flex" },
                             justifyContent: "center",
                         }}
                     >
                         {pages.map((page) => (
                             <NavLink
                                 key={page}
-                                to={page.toLowerCase() === 'home' ? '/' : `/${page.toLowerCase()}`}
-                                style={({isActive}) => ({
+                                to={
+                                    page.toLowerCase() === "home"
+                                        ? "/"
+                                        : `/${page.toLowerCase()}`
+                                }
+                                style={({ isActive }: { isActive: boolean }) => ({
                                     textDecoration: "none",
                                     color: isActive ? "yellow" : "white",
                                     margin: "0 10px",
@@ -136,8 +146,8 @@ function Nav() {
                             </NavLink>
                         ))}
                     </Box>
-                    <Box sx={{flexGrow: 0}}>
-                        <img src={AmineLogo} alt="Amine Logo" style={{height: "40px"}}/>
+                    <Box sx={{ flexGrow: 0 }}>
+                        <img src={AmineLogo} alt="Amine Logo" style={{ height: "40px" }} />
                     </Box>
                 </Toolbar>
             </Container>
