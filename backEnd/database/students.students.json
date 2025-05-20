@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "682b3e896d776ad90ed7837b"
+  },
+  "name": "John Doe",
+  "year_of_birth": 1990,
+  "email": "john@jjjj.cc",
+  "city": "New York",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682b54d45ee4d5e572f09b2e"
+  },
+  "name": "postman put",
+  "year_of_birth": 1995,
+  "email": "postman@jjjj.cc",
+  "city": "New city",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682ca61bcfacc58103db2447"
+  },
+  "name": "postman react",
+  "year_of_birth": 2003,
+  "email": "postman@post.cc",
+  "city": "New react",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682cac23cfacc58103db244e"
+  },
+  "name": "test post for react",
+  "year_of_birth": 2025,
+  "email": "test1e@react.dd",
+  "city": "react",
+  "__v": 0
+}]
