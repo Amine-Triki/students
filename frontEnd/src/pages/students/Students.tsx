@@ -11,8 +11,8 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-import { useState } from "react";
-
+import { useState , useEffect} from "react";
+import   {createSudent, fetchStudents } from  "../../api/students";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -35,12 +35,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+export interface Student {
+  name: string;
+  year_of_birth: number;
+  email: string;
+  city: string;
+}
 
 
 
 const Students = () => {
 
 
+
+  useEffect(() => {
+fetchStudents().then((data) => {setRows(data)}).catch((error) =>  alert(error));
+  }, []);
 
   const [formCheck, setFormCheck] = useState({
     name: "",
@@ -49,50 +59,47 @@ const Students = () => {
     city: "",
   });
 
-  const [rows, setRows] = useState([
-    createData("lee", 1998, "a@z3cc.cc", "ste"),
-    createData("yasuo", 237, "b@z3cc.cc", "us"),
-    createData("jinx", 262, "c@z3cc.cc", "uk"),
+  const [rows, setRows] = useState<Student[]>([
+
   ]);
 
+  
 
-  function createData(
-    name: string,
-    year_of_birth: number,
-    email: string,
-    city: string
-  ) {
-    return { name, year_of_birth, email, city };
+  const handleSubmit = async (event: React.FormEvent) => {
+  event.preventDefault();
+
+  if (!formCheck.name.trim()) {
+    alert("Please enter a name.");
+    return;
   }
-  
-  
-  
-  function handleSubmit(event: React.FormEvent) {
-    event.preventDefault(); // Prevent page reloading
-  
-  // Simple name verification
-    if (!formCheck.name.trim()) {
-      alert("Please enter a name.");
-      return;
-    }
-  
-    const newStudent = createData(
-      formCheck.name,
-      parseInt(formCheck.year_of_birth),
-      formCheck.email,
-      formCheck.city
-    );
-  
-    setRows((prevRows) => [...prevRows, newStudent]);
 
-    // Reset the model
+  // Parse year to number
+  const studentData: Student = {
+    name: formCheck.name,
+    year_of_birth: parseInt(formCheck.year_of_birth),
+    email: formCheck.email,
+    city: formCheck.city,
+  };
+
+  try {
+    const data = await createSudent(studentData);
+    setRows((prevRows) => [...prevRows, data]);
+
+    // Reset the form
     setFormCheck({
       name: "",
       year_of_birth: "",
       email: "",
       city: "",
     });
+  } catch (error) {
+    console.error("Error adding student:", error);
+    alert("Failed to add student");
   }
+};
+
+  
+ 
   return (
     <main>
       <Container maxWidth="md" sx={{ my: 10 }}>
