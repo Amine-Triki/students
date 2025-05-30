@@ -1,24 +1,30 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import studentsRouter from './routers/students';
-import cors from 'cors';
+import express from "express";
+import mongoose from "mongoose";
+import studentsRouter from "./routers/students";
+import cors from "cors";
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/students')
-  .then(() => console.log('Connected!'));
+if (!process.env.MONGO_URI) {
+  throw new Error("Missing MONGO_URI in environment variables");
+}
+mongoose
+  .connect(process.env.MONGO_URI!)
+  .then(() => console.log("Connected!"));
 
-app.use(cors({
-  origin: 'http://localhost:5173',
+app.use(
+  cors({
+    origin: process.env.CLIENT_ORIGIN,
+  })
+);
 
-}))
-
-app.use('/students', studentsRouter);
-
+app.use("/students", studentsRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
