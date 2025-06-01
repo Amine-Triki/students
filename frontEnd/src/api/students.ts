@@ -1,7 +1,7 @@
 
 import type { Student } from "../pages/students/Students";
 
-const API_URL =`${import.meta.env.VITE_API_URL}/students`;
+const API_URL =`${import.meta.env.VITE_API_URL}`;
 export const fetchStudents = async () => {
 
 // eslint-disable-next-line no-useless-catch
