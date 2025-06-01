@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
 
@@ -25,7 +25,7 @@ app.use(
   })
 );
 
-app.use("/students", studentsRouter);
+app.use("/api/students", studentsRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
